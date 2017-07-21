@@ -1,0 +1,143 @@
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<article class="content items-list-page">
+   <div class="title-search-block" ng-init="developersList('requested')">
+      <div class="title-block">
+         <div class="row">
+            <div class="col-md-6">
+               <h3 class="title"> Developers Items
+                  </a>
+               </h3>
+            </div>
+         </div>
+      </div>
+      <div class="items-search"  >
+         <form class="form-inline">
+            <div class="input-group"> <input type="text" class="form-control boxed rounded-s" placeholder="Search for..."> <span class="input-group-btn">
+               <button class="btn btn-secondary rounded-s" type="button">
+               <i class="fa fa-search"></i>
+               </button>
+               </span> 
+            </div>
+         </form>
+      </div>
+   </div>
+   <ul class="nav nav-pills">
+      <li class="nav-item"> <a href="" class="nav nav-link active"  data-target="#home-pills" aria-controls="home-pills" data-toggle="tab" ng-click="onClickTab(1)" role="tab" aria-expanded="true">Developer Requested</a> </li>
+      <li class="nav-item"> <a href="" class=" nav nav-link" data-target="#profile-pills" aria-controls="profile-pills" data-toggle="tab" ng-click="onClickTab(2)"  role="tab" aria-expanded="true" >Plugin Requested</a> </li>
+      
+   </ul>
+   <div class="tab-content tabs-bordered">
+   <div class="tab-pane nav fade in active" id="home-pills">
+      <div class="card items">
+         <div class="item-list striped" >
+            <table class="table">
+               <thead class="thead-inverse">
+                  <tr>
+                    <th>Company Name</th>
+                   <th>Email</th>
+                   <th>Developer Key Status</th>
+                   <th>Action</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat ="devuser in developer">
+                     <td>{{devuser.company_name}}</td>
+                     <td>{{devuser.email_id}}</td>
+                     <td>{{devuser.developer_key_status}}</td>
+                     <td style="cursor: pointer;"><a ng-click="developerpluginAction(devuser, 'approved', 'Developer Approve')">Approve</a> / <a ng-click="developerpluginAction(devuser, 'rejected', 'Developer Reject')">Reject</a></td>
+                  </tr>
+                  <tr>
+                     <td style="text-align:center;" colspan="7" ng-show="developer.length==0"> No Result Found ! </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+  </div> 
+
+   <div class="tab-content tabs-bordered">
+   <div class="tab-pane nav fade" id="profile-pills">
+      <div class="card items">
+         <div class="item-list striped" >
+            <table class="table">
+               <thead class="thead-inverse">
+                  <tr>
+                     <th>Company Name</th>
+                     <th>Email</th>
+                     <th>Plugin Name</th>
+                     <th>Description</th>
+                     <th>Plugin Status</th>
+                     <th>Action </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat ="devuser in developerPluginList">
+                     <td>{{devuser.company_name}}</td>
+                     <td>{{devuser.email_id}}</td>
+                     <td>{{devuser.name}}</td>
+                     <td>{{devuser.plugin_code}}</td>
+                     <td>{{devuser.status}}</td>
+                     <td style="cursor: pointer;"><a ng-click="developerpluginAction(devuser, 'approved', 'Plugin Approve')">Approve</a> / <a ng-click="developerpluginAction(devuser, 'rejected', 'Plugin Reject')">Reject</a></td>
+                  </tr>
+                  <tr>
+                     <td style="text-align:center;" colspan="7" ng-show="developer.length==0"> No Result Found ! </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+   </div>
+
+   </div>
+
+
+   <nav class="text-xs-right">
+      <ul class="pagination">
+         <li class="page-item"> <a class="page-link" href="">
+            Prev
+            </a> 
+         </li>
+         <li class="page-item active"> <a class="page-link" href="">
+            1
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            2
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            3
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            4
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            5
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            Next
+            </a> 
+         </li>
+      </ul>
+   </nav>
+</article>
+<script type="text/javascript">
+   // $.material.init();
+</script>
+<script type="text/ng-template" id="developeractions">
+   <h3 class="ngdialog-heading"><b>{{title}}</b></h3>
+   <div class="ngdialog-message">
+       <per>Are you sure you want to {{action}}?
+       </per>
+   </div>
+   <div class="ngdialog-buttons">
+       <button type="button" class="btn btn-raised btn-info" ng-dialog-close-previous ng-click="confirm()"></i> Yes
+       </button>
+     
+   </div>
+</script>

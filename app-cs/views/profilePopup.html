@@ -1,0 +1,18 @@
+<div  id="myContent">
+ <table  class="table tablestyled">
+        
+      <tbody>
+         <tr ng-repeat="plugin in finalJson.credentials">
+            <td>
+               <input  id="address"  ng-model="plugin.key" name="address" placeholder="key" class="form-control parsley-success"  data-parsley-id="0951">
+            </td>
+            <td>
+                  <input type="text"  placeholder="value" name="paymentbill" ng-model="plugin.value"  value="" my-enter="addCredentials('credentials')" class="form-control">
+                  <span  ng-if="$index > 0" class="pluginremove" ng-click="removecredentials('credentials', $index)"><i class="fa fa-times-circle" style="font-size:15px" aria-hidden="true"></i></span>
+            </td>
+         </tr>
+         <button type="button" class="btn-horz-o btn-left btn-fill-horz-o btn-save" ng-dialog-close-previous ng-click="updatePluginDetails(inalJson.credentials)"> <i class="icon-save"></i> Yes
+            </button>
+      </tbody>
+   </table>        
+</div>

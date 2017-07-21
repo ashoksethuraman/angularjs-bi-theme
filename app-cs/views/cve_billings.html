@@ -1,0 +1,372 @@
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<article class="content item-editor-page">
+   <div class="title-block">
+      <h3 class="title"> Billing Creation <span class="sparkline bar" data-type="bar"></span> </h3>
+   </div>
+   <form role="form" name="v.formValidate" method="post" class="f1  form-horizontal" data-parsley-validate="" novalidate="">
+      <div class="">
+         <div class="auth-content" style="padding: 61px">
+            <div class="f1-steps">
+               <div class="f1-progress">
+                  <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+               </div>
+               <div class="f1-step active">
+                  <div class="f1-step-icon"><i class="fa fa-credit-card"></i></div>
+                  <p>1. Billing details</p>
+               </div>
+               <div class="f1-step">
+                  <div class="f1-step-icon"><i class="fa fa-key"></i></div>
+                  <p>2. Plugin Mapping</p>
+               </div>
+               <div class="f1-step">
+                  <div class="f1-step-icon"><i class="fa fa-bars"></i></div>
+                  <p>3. Summary</p>
+               </div>
+            </div>
+            <fieldset>
+               <br>
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12 " >
+                  <div class="col-lg-5 col-md-5 col-sm-5 co-xs-5">
+                     <div class="form-group label-floating  is-empty {{validateForClass('planname',billing.name)}}">
+                        <label class="control-label">Plan Name </label>
+                        <input type="text" ng-model="billing.name" class="form-control" name="planname" required="required" value="billing.name">  
+                     </div>
+                     <span ng-show="validateInput('planname', 'required')" class="text-danger">Please enter plan name</span>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 co-xs-2"></div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 co-xs-5">
+                     <div class="form-group label-floating {{validateForClass('price',billing.price)}}">
+                        <label class="control-label">Price</label>
+                        <input type="number" ng-model="billing.price" class="form-control" name="price" required="required" value="{{billing.price}}">    
+                     </div>
+                     <span ng-show="validateInput('price', 'required')" class="text-danger">Please enter price</span>
+                  </div>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12" style=" padding-top: 22px;">
+                  <div class="col-lg-2 col-md-2 col-sm-2 co-xs-2">
+                     <div class="form-group label-floating {{validateForClass('creditlimit',billing.credit_limit)}}">
+                        <label class="control-label" >No of Queries </label>
+                        <input type="number" ng-model="billing.credit_limit" class="form-control"  required="required" name="creditlimit" value="billing.credit_limit" >
+                     </div>
+                     <span ng-show="validateInput('creditlimit', 'required')" class="text-danger">Please enter queries</span>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3 co-xs-3">
+                     <div class="form-group label-floating {{validateForClass('billing_period',billing.units)}}">
+                        <label  class="control-label">Per {{billing.units}}</label> 
+                        <select  class="form-control"  ng-model="billing.units" name="billing_period"  required="required" ng-options="data.name  as data.name for data in billingperiods" >
+                           <!-- <option value="billing.units" ></option> -->
+                        </select>
+                     </div>
+                     <span ng-show="validateInput('billing_period', 'required')" class="text-danger">Select valid billing period</span>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 co-xs-2"></div>
+                  <div class="col-md-5 col-sm-5 col-xs-12 addresstag" style="    margin-top: -16px;">
+                     <div class="form-group label-floating {{validateForClass('desc',billing.description)}} " >
+                        <label class="control-label" for="discription" style="margin-bottom:5px">Description</label>
+                        <textarea type="text" id="discription"  ng-readonly="isView"   ng-model="billing.description"  required="required" name="desc"  class="form-control"> </textarea>
+                     </div>
+                     <span ng-show="validateInput('desc', 'required')" class="text-danger">Please enter description</span>
+                  </div>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12">
+                  <div class="col-lg-5 col-md-5 col-sm-5 co-xs-5 has-success">
+                     <div class="form-group">
+                        <label class="control-label">Billing Validity</label>
+                        <div> <label>
+                           <input class="radio" ng-model='billing.billing_plan_type' value='Monthly' name="inline-radios" type="radio">
+                           <span> Monthly</span>
+                           </label> <label>
+                           <input class="radio" ng-model='billing.billing_plan_type' value='Semi-Annually'  name="inline-radios" type="radio">
+                           <span>Semi-annually</span>
+                           </label> <label>
+                           <input class="radio" ng-model='billing.billing_plan_type' value='Annually' name="inline-radios" type="radio">
+                           <span>Annually</span>
+                           </label> 
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 co-xs-2"></div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 co-xs-5 has-success">
+                     <div class="form-group">
+                        <label class="control-label">Billing Status</label>
+                        <div> <label>
+                           <input class="radio" ng-model='billing.status' value='Publish' name="status-radios" type="radio">
+                           <span>Publish</span>
+                           </label> 
+                           <label>
+                           <input class="radio"  ng-model='billing.status' value='Unpublish'  name="status-radios" type="radio">
+                           <span>Unpublish</span>
+                           </label> 
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="f1-buttons">
+                  <button type="button" class="btn btn-raised btn-info btn-next" data-last="Finish" ng-click="getTaskList()">
+                  Next <i class="fa fa-chevron-right"></i>
+                  </button>
+               </div>
+            </fieldset>
+            <fieldset>
+               <div class="col-md-12 col-sm-12 col-xs-12 card-alignment">
+                  <div ng-repeat="data in tasks | itemsPerPage:itemsPerPage"  total-items="total_count">
+                     <div class="col-md-6" ">
+                        <div class="card card-1" ng-class="{'selecteddiv': data.class == true}">
+                           <div class="cardplugin"   >
+                              <div class="col-md-5 col-sm-5col-xs-12">
+                                 <div class="">
+                                    <div class="colorblue"><b>Task Name</b></div>
+                                    <div class="colorblue"><b>Task Intent</b></div>
+                                    <div class="colorblue"><b>Description</b></div>
+                                 </div>
+                              </div>
+                              <div class="col-md-7 col-sm-7 col-xs-12" style="width: 43%;">
+                                 <div class="overme"></div>
+                                 <div class="colorblue">{{data.name}}</div>
+                                 <div class="colorblue">{{data.intent}}</div>
+                                 <div class="colorblue">{{data.description}}</div>
+                                 <div id="modelopen" ng-click="modelopens(data)" class="colorblue viewmore">view More..</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div search-pagination></div>
+               </div>
+               <div class="f1-buttons">  
+                  <button type="button" class="btn btn-raised btn-info btn-previous"> 
+                  <i class="fa fa-chevron-left"></i> Prev
+                  </button>
+                  <button type="button" class="btn btn-raised btn-info btn-next" data-last="Finish" >
+                  Next <i class="fa fa-chevron-right"></i>
+                  </button>
+               </div>
+            </fieldset>
+            <fieldset>
+               <div class="pluginsummary full-width">
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-desktop summaryicon" aria-hidden="true" ></i>Plan Name </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{billing.name}}</span> 
+                     </div>
+                  </div>
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-shield summaryicon" aria-hidden="true" ></i>Validity </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{billing.billing_plan_type}}</span> 
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="col-md-6">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-question-circle-o summaryicon" aria-hidden="true" ></i>Queries </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{billing.credit_limit}}/{{billing.units}}</span> 
+                     </div>
+                  </div>
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-bars summaryicon" aria-hidden="true" ></i>Status </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{billing.status}}</span> 
+                     </div>
+                  </div>
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-usd summaryicon" aria-hidden="true" ></i>Price </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{billing.price}}</span> 
+                     </div>
+                  </div>
+                  <div class="pluginsummary full-width">
+                     <div dir-paginate="summaryData in pluginselected|itemsPerPage:itemsPerPage" >
+                        <div class="col-md-6" >
+                           <div class="card card-1">
+                              <div class="cardplugin"   ng-class="{'selecteddiv': data.class == true}">
+                                 <div class="col-md-5 col-sm-5col-xs-12">
+                                    <div class="">
+                                       <div class="colorblue"><b>
+                                       Task Name</b></div>
+                                       <div class="colorblue"><b>Task Intent</b></div>
+                                       <div class="colorblue"><b>Description</b></div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <div class="overme"></div>
+                                    <div class="colorblue">{{summaryData.name}}</div>
+                                    <div class="colorblue">{{summaryData.intent}}</div>
+                                    <div class="colorblue">{{summaryData.description}}</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="f1-buttons">
+                  <button type="button" class="btn btn-raised btn-info btn-previous"> 
+                  <i class="fa fa-chevron-left"></i> Prev
+                  </button>
+                  <button type="button" ng-click="createBilling(billing, pluginselected)" class="btn btn-raised btn-info success btn-finish" style="display: inline-block;">
+                  Setup Billing
+                  </button>
+               </div>
+            </fieldset>
+         </div>
+      </div>
+   </form>
+</article>
+
+<script type="text/javascript">
+   $.material.init();  
+</script>
+<script src="assets/vendor-plugins/wizard/billing-wizard.js"></script>
+<style type="text/css">
+   .card {
+   border-radius: 2px;
+   display: inline-block;
+   margin: 1rem;
+   position: relative;
+   width: 340px;
+   }
+   .card-1 {
+   box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+   }
+   .card-1:hover {
+   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+   }
+   .card-2 {
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+   }
+   .card-3 {
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+   }
+   .card-4 {
+   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+   }
+   .card-5 {
+   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+   }*/
+</style>
+
+
+<div id="myModal" class="modal fade product_view" id="product_view">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            <h3 class="modal-title">Task Details </h3>
+         </div>
+
+         <div class="modal-body">
+            <div class="row">
+               <div class="full-width">
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-desktop summaryicon" aria-hidden="true" ></i>Task Name </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{taskItems.name}}</span> 
+                     </div>
+                  </div>
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-shield summaryicon" aria-hidden="true" ></i>Intent </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{taskItems.intent}}</span> 
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="col-md-6">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-question-circle-o summaryicon" aria-hidden="true" ></i>Status </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{taskItems.status}}</span> 
+                     </div>
+                  </div>
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname"><i class="fa fa-bars summaryicon" aria-hidden="true" ></i>Description </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{taskItems.description}}</span> 
+                     </div>
+                  </div>
+                  <h4 class="headerBilling">Plugin Details </h4>
+                  <hr class="margintopten">
+                  <div ng-init="taskItems.class = true;" ng-repeat="item in taskItems.childObjects">
+                  <div class="col-md-6">
+                     <div class="col-md-6">
+                        <label class="summarylabel" for="vendorname">Item Name </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{item.name}}</span> 
+                     </div>
+                  </div>
+                  <div class=" col-md-6"">
+                     <div class="col-md-6 ">
+                        <label class="summarylabel" for="vendorname">Plugin Name </label> 
+                     </div>
+                     <div class="col-md-6 ">
+                        <span class="summaryspan" for="vendorname">{{taskItems.name}}</span> 
+                     </div>
+                  </div>
+                  <h4 class="tasktext-color headerBilling"> Input Filters  </h4>
+                  <hr class="margintopten">
+                  <div class="row">
+                     <div class="col-sm-12" style="padding-left: 37px;    padding-right: 80px;">
+                        <table class="table table-hover table-striped">
+                           <thead>
+                              <tr>
+                                 <th>Name</th>
+                                 <th>Type</th>
+                                 <th>Sample Value</th>
+                                 <th>Actual Value</th>
+                              </tr>
+                           </thead>
+                           <tbody  >
+                              <tr ng-repeat="value in item.query_template" >
+                                 <td>{{value.name}}</td>
+                                 <td>{{value.type}}</td>
+                                 <td>{{value.sampleValue}}</td>
+                                 <td>{{value.actualValue}}</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <h4 class="tasktext-color headerBilling"> Output Fields  </h4>
+                  <hr class="margintopten">
+                   <div  ng-repeat="fields in item.query_template 
+                     ">
+                  <div ng-repeat="values in fields.responseFields 
+                     " >
+                     <span style="background: rgba(0, 128, 0, 0.4);"   class="label label-default customspans pull-right ">{{values}}</span>
+                  </div>
+                  </div>
+               </div>
+ 
+
+                <div class="form-group row" style=" margin-top: 41px;">
+                  <div class="col-sm-10 col-sm-offset-4" > <button type="submit" class="btn btn-primary" ng-click="selectedPlugin(taskItems)">
+                     Select
+                     </button> 
+                  </div>
+               </div>
+
+
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

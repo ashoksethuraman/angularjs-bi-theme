@@ -1,0 +1,74 @@
+<div class="right_col" role="main" >
+  <div id="content" class="col-lg-10 col-sm-11 ">
+    <ol class="breadcrumb">
+      <li><a href="">User</a></li>
+      <li class="active">Details</li>
+    </ol>
+    <div class="row profile">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="nav nav-tabs owntabs" id="myTabs">
+              <li class="active "><a id="tab-1" href="#userBilling" data-toggle="tab">billing Plan</a></li>
+              <li><a href="#userInfo" id="tab-3" data-toggle="tab">User Info</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="userBilling">
+                <div class="columns userUpdateColumn "  ng-repeat="datas in userProfile.json_agg" >
+                  <ul class="price">
+                    <li class="header">{{datas.billingname}}</li>
+                    <li class="grey">$ {{datas.billingprice}}</li>
+                    <li >{{datas.billiingcreditlimit}} / {{datas.billingunits}}</li>
+                    <li>{{datas.billingstatus}}</li>
+                    <li>{{datas.pluginIds.length}} Plugins</li>
+                    <li>{{datas.billingdescription}}</li>
+                    <li class="grey"><a ng-click="deleteplans(datas)" ng-class="{'disableContent': Action == false}" class="button">Delete</a></li>
+                 </ul>
+                </div>
+                <button  type="button" class="btn btn-raised btn-info btn-next pull-right"  ng-click="editAction(butttonName)">{{butttonName}}</button>
+                <button  type="button"  ng-class="{'disableContent': Action == false}" class="btn btn-raised btn-info btn-next pull-right"  ng-click="addBlling()">Add More</button>
+              </div>
+              <div class="tab-pane" id="userInfo">
+                <p style="text-align: center; color: red;">yet not implementing </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+  $.material.init();
+</script>
+
+
+<script type="text/ng-template" id="addingbilling" >
+ <form class="form-horizontal" role="form" name="vp.crentilalsformValidate"  data-parsley-validate="" novalidate="">
+       <h3 class="ngdialog-heading"><b>Billing plans</b></h3>
+       <div class="dialog-contents" >
+       <!-- ng-controller="manageusrCtl"  -->
+       <!-- {{totalbillings.billingPlans |json}} dgnj -->
+        <div class="columns userUpdateColumn" ng-repeat="data in totalbillings.billingPlans">
+          <ul class="price">
+             <li class="header">{{data.billingname}}</li>
+             <li class="grey">$ {{data.billingprice}}</li>
+              <li >{{data.billiingcreditlimit}} / {{data.billingunits}}</li>
+             <li>{{data.billingstatus}}</li>
+             <li>{{data.plugins.length}} Plugins</li>
+             <li>{{data.billingdescription}}</li>
+             <li class="grey {{selectedplan}}"><a  ng-click="addbillingTouser(data)" class="button">Select</a></li>
+          </ul>
+        </div>
+       </div>
+   </form> 
+  </script>
+
+
+<style type="text/css">
+   .ngdialog.ngdialog-theme-default .ngdialog-content {
+   width: 820px !important;
+   }
+</style>

@@ -1,0 +1,300 @@
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<article class="content item-editor-page">
+ <div class="titleoftask" style="margin-left: 16px;" >
+      <h4 ng-if="!taskId" class=" headersTask " ng-click="createTask()" >Create Task</h4>
+      <h4 ng-if="taskId" class="" ng-click="createTask()" >{{task.name}}   ({{task.intent}})</h4>
+   </div>
+   <div class="col-sm-3 task-menu" >
+      <div class="">
+         <div id="{{parentId}}">
+            <div class="panel txt-size"  ng-repeat="item in model">
+             
+               <a href="#"  class="i-size color-text"  data-toggle="collapse" data-parent="#{{parentId}}" data-target="#child{{$index}}">{{item.index}}. <input  ng-blur="itemTitlefocusRemove(item.index, $index)"   type="text" name="title" ng-class="{'changetolabelEdit': EditIndex == item.index, 'changetolabel':EditIndex != item.index}" ng-readonly="enableReadonly" ng-model="item.title" value="{{item.title}}"> 
+                 <i class="fa fa-chevron-circle-right my-icon"></i>
+               </a>
+               <span>&nbsp;</span><i ng-click="itemTitleEdit(item.index, $index)" class="fa fa-pencil"></i>
+               <div class="headerlabel" id="child{{$index}}" ng-class="{'collapse in ':$index >= autoAddIndex, 'collapse' :closeListIndex.indexOf($index) != -1} ">
+                 
+                  <ul>
+                     <li style="font-size: 13px;" class="list-group listbottom"  ng-repeat="subitem in item.subitems" ng-class="{selectedList : activeMenu === subitem && item.index === itemIndex, disabled : $index >itemNext && !isView}" ng-int="subitem = activeMenu; $index =itemIndex;">
+                        <!-- checkMenu($index ,item.index) -->
+                        <a href="#" class="list-group-item"  ng-click="listOfplugins(subitem, $index, item.index)" >{{subitem}}   </a> 
+                     </li>
+                  </ul>
+               </div>
+            </div>
+             <div class="text-center">
+                <span class="spanlink" ng-click="responseTemplate()"> Response Templates </span>
+             </div>
+         </div>
+         <accordion model="model" id="test"></accordion>
+         <i class="fa fa-plus-circle fa-3x" ng-click="addMenu()" aria-hidden="true"></i>
+      </div>
+   </div>
+   <div class="col-sm-9 task-options" style="background-color: white;     min-height: 480px; ">
+      <div ng-if="responsestep">
+         <form role="form" name="tc.formValidateResponse"  data-parsley-validate="" novalidate="" >
+            <div class="col-xs-12" style="margin-top:62px" >
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12 taskdiv">
+                  <div class="form-group label-floating {{validateForClass('success',response.success)}}">
+                     <label class="control-label" >On-Success </label>
+                     <input type="text" ng-model="response.success" class="form-control"  required="required" name="success" value="response.success" >
+                  </div>
+                  <span ng-show="validateInput('success', 'required')" class="text-danger">Please enter success message</span>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12 taskdiv">
+                  <div class="form-group label-floating {{validateForClass('failed',response.failed)}}">
+                     <label class="control-label" >On Failed  </label>
+                     <input type="text" ng-model="response.failed" class="form-control"  required="required" name="failed" value="response.success" >
+                  </div>
+                  <span ng-show="validateInput('failed', 'required')" class="text-danger">Please enter failed message</span>
+               </div>               
+            </div>
+         </form>
+ 
+         <button   ng-if="taskId" type="button" ng-click="submitForm(response, 'responseTemp')" class="btn btn-raised btn-info success btn-finish custombutton" style="display: inline-block; float: right;">
+         Update
+         </button>       
+         <button  ng-if="!taskId" type="button"  ng-class="{'disableContent': task_saved == true}"   ng-click="submitForm(response, 'responseTemp')" class="btn btn-raised btn-info success btn-finish custombutton" style="display: inline-block; float: right;">
+         Save
+         </button>
+
+      </div>
+      <div ng-if="taskHeaderstep">
+         <form role="form" name="tc.formValidate"  data-parsley-validate="" novalidate="" >
+            <div class="col-xs-12" style="margin-top:62px" >
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12 taskdiv">
+                  <div class="form-group label-floating {{validateForClass('name',task.name)}}">
+                     <label class="control-label" >Title </label>
+                     <input type="text" ng-model="task.name" class="form-control"  required="required" name="name" value="task.name" >
+                  </div>
+                  <span ng-show="validateInput('name', 'required')" class="text-danger">Please enter name</span>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12 taskdiv">
+                  <div class="form-group label-floating {{validateForClass('intent',task.intent)}}">
+                     <label class="control-label" >Intent  </label>
+                     <input type="text" ng-model="task.intent" class="form-control"  required="required" name="intent" value="task.intent" >
+                  </div>
+                  <span ng-show="validateInput('intent', 'required')" class="text-danger">Please enter intent</span>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12 co-xs-12 taskdiv">
+                  <div class="form-group label-floating {{validateForClass('desc',task.intent)}}">
+                     <label class="control-label" >Description  </label>
+                     <textarea type="text" id="discription"      ng-model="task.description"  required="required" name="desc"  class="form-control"> </textarea>
+                  </div>
+               </div>
+            </div>
+         </form>
+         <button   ng-if="taskId" type="button" ng-click="submitForm(task, 'update')" class="btn btn-raised btn-info success btn-finish custombutton" style="display: inline-block; float: right;">
+         Update
+         </button>
+         <button  ng-if="!taskId" type="button"  ng-class="{'disableContent': task_saved == true}"   ng-click="submitForm(task, 'create')" class="btn btn-raised btn-info success btn-finish custombutton" style="display: inline-block; float: right;">
+         Save
+         </button>
+      </div>
+      <div ng-if="Allplugin.plugins.length > 1 && firstStep">
+         <h4 class="intentTitle" > Choose  Plugin  </h4>
+         <hr class="margintopten">
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 card-alignment" ng-if="firstStep">
+         <div dir-paginate="data in Allplugin.plugins|itemsPerPage:itemsPerPage"  total-items="total_count">
+            <div class="col-md-6 againhoverme" ng-click="selectedPlugin(data,Allplugin.index)">
+               <div class="hovereffect">
+                  <div class="cardplugin"   ng-class="{'selecteddiv': data.class == true}">
+                     <div class="col-md-5 col-sm-5col-xs-12">
+                        <div class="">
+                           <div class="colorblue"><b>Plugin Name</b></div>
+                           <div class="colorblue"><b>Plugin Version</b></div>
+                           <div class="colorblue"><b>Description</b></div>
+                        </div>
+                     </div>
+                     <div class="col-md-7 col-sm-7 col-xs-12">
+                        <div class="overme"></div>
+                        <div class="colorblue">{{data.name}}</div>
+                        <div class="colorblue">{{data.version}}</div>
+                        <div class="colorblue">{{data.description}}</div>
+                        {{data.id}}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div search-pagination></div>
+      </div>
+      <div class="x_content" ng-if="secondstep">
+         <form class="form-horizontal ">
+            <h4 class="intentTitle"> Select {{intentTitile}} Intent 
+              </h4>
+            <hr class="margintopten">
+            <div class="announcementsection">
+               <ul class="announcementsearch" ng-repeat="datas in model |  filter:{index: itemIndex}">
+                  <li ng-repeat="data in datas.intents" 
+                     ng-class="{'colorchanged' : datas.selectedIntent == data}" total-items="total_count" ng-click="intentSelected(data)">
+                     <div class="announcementeach" >
+                        <div class="col-md-2" style="cursor: pointer;" >
+                           <input type="radio" ng-model="$parent.datas.selectedIntent" ng-value="data"/>
+                        </div>
+                        <div class="col-md-10">
+                           <h3>{{data}}</h3>
+                        </div>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <button type="button" ng-class="{'disableContent': intentOption == false}"  ng-click="QueryTemplates()" class="btn btn-raised btn-info success btn-finish" style="display: inline-block; float: right;">
+            Save + Continue 
+            </button>
+         </form>
+         <div search-pagination></div>
+      </div>
+      <div class="x_content" ng-if="thirdstep">
+         <form class="form-horizontal " style="margin-top: 39px;" >
+            <h4 class="tasktext-color" > Input Fillters </h4>
+            <hr class="margintopten">
+            <div class="row">
+               <div class="col-sm-12">
+                  <table class="table table-hover table-striped">
+                     <thead>
+                        <tr>
+                           <th><input id="checkbox" type="checkbox"></th>
+                           <th>Name</th>
+                           <th>Type</th>
+                           <th>SampleValue</th>
+                        </tr>
+                     </thead>
+                     <tbody  ng-repeat="datas in model |  filter:{index: itemIndex}">
+                        <tr ng-repeat="value in datas.filterTemplates.filters" >
+                           <th style=" border-top: none !important; "><input id="checkbox" ng-model=value[$index] type="checkbox"  ng-click="selectedInputFilters(value)" value="datas.selectedFilter"></th>
+                           <td>{{value.name}}</td>
+                           <td>{{value.type}}</td>
+                           <td>{{value.sampleValue}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <!--/row-->
+            <h4 class="tasktext-color"> OutputFields </h4>
+            <hr class="margintopten">
+            <div class="row" style="margin-left: 23px; margin-bottom: 39px"  ng-repeat="datas in model |  filter:{index: itemIndex}" >
+               <div class= "spansborder" ng-repeat="fields in datas.filterTemplates.responseFields 
+                  " >
+                  <span ng-click="fieldsOutputSelect(fields, 'add')"  class="btn-label label label-default  customspans pull-left " ng-class="{'fieldsselected':datas.fields.indexOf(fields) != -1}" >
+                  {{fields}}   
+                  <i ng-if="datas.fields.indexOf(fields) != -1" class="fa fa-close use" aria-hidden="true"></i> 
+                  </span>
+                  <!-- {{datas.fields.indexOf(fields)}}:: {{datas.fields | json}} -->
+               </div>
+            </div>
+            <h4 ng-if="selectedTags"  class="tasktext-color"> Query Templates </h4>
+            <div ng-if="selectedTags" class="filterSelected">
+               <div ng-if="fieldsSummary">
+                  <h4 class="tasktext-color"> Input Fields </h4>
+                  <hr class="margintopten">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <table class="table table-hover table-striped">
+                           <thead>
+                              <tr>
+                                 <th>Name</th>
+                                 <th>SampleValue</th>
+                                 <th>ActualValue</th>
+                              </tr>
+                           </thead>
+                           <tbody ng-repeat="datas in model |  filter:{index: itemIndex}" >
+                              <tr   ng-repeat="fields in datas.selectedFilter" >
+                                 <td> <span class="tableSpan">{{fields.name}}</span></td>
+                                 <td> {{fields.sampleValue}} </td>
+                                 <td ng-if="datas.index != 1" style="float: right;" >
+                                  <div class="col-md-12 col-sm-12">
+                                   <div class="col-md-8 tagsDiv" style="width: 90%">
+                                       <tags-input ng-model="fields.actualValue" display-property="name" template="my-custom-tags"  replace-spaces-with-dashes="false" addOnEnter = "false">  </tags-input>
+                                    </div>
+                                    <div class="col-md-1">
+                                       <span   ng-if="datas.index != 1" class="eyeOpen">
+                                       <i class="fa fa-eye" ng-click="checkAutoLoad(datas, $index)" aria-hidden="true"></i> 
+                                       </span> 
+                                    </div>
+                                  </div> 
+                                    <div class="divopacity" ng-if="autoLoad == true && autoListIndex == $index">
+                                       <ul class="list-unstyled customize" ng-init="itemListIndex = $index">
+                                          <li class="listItem" ng-click="addtags(data, itemListIndex)" ng-repeat="data in ouputInput">
+                                             <div ng-if="data.sequence < itemIndex">
+                                                <span class="badge pull-left"> {{data.sequence}}</span>
+                                                <span>{{data.name}}</span>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </td>
+                                 <!--  <td>
+                                    </td> -->
+                                 <td ng-if="datas.index == 1" > 
+                                    <input type="text" ng-model="fields.actualValue" class="form-control" name="planname" required="required" value="">     
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+               
+               <div ng-if="responseFieldSummary">
+                  <h4 class="tasktext-color"> Output Fields  </h4>
+                  <hr class="margintopten">
+                  <div class="row" style=" margin-left: 23px;" ng-repeat="datas in model |  filter:{index: itemIndex}" >
+                     <div ng-repeat="filterValue in datas.fields 
+                        " >
+                        <span style="background: rgba(0, 128, 0, 0.4);"   class="label label-default customspans pull-right ">{{filterValue}}</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <button type="button" ng-click="saveTaskItem()" class="btn btn-raised btn-info success btn-finish" style="display: inline-block; float: right;">
+            Save
+            </button>
+   
+             <button type="button" ng-click="saveTaskItem()" class="btn btn-raised btn-info success btn-finish" style="display: inline-block; float: right;">
+            Update
+            </button>
+
+         </form>
+         <div search-pagination></div>
+      </div>
+   </div>
+</div>
+
+</article>
+
+
+<!-- 
+<script type="text/javascript">
+  $.material.init();  
+</script>
+ -->
+
+<script type="text/javascript">
+   $ (function () {
+   $('.list-group li').click(function() {
+    $(this).addClass('active').siblings().removeClass('active');
+   });
+   })
+</script>
+<script type="text/ng-template" id="my-custom-tags">
+   <div class="tag-template">
+     <div>
+       <span class="badge">{{data.sequence}}</span>
+        <span>{{$getDisplayText()}}</span>
+       
+       <a class="remove-button" ng-click="$removeTag()">x</a>
+     </div>
+   </div> 
+   
+</script>
+<script type="text/ng-template" id="my-custom-template">
+   <div class="left-panel"></div>
+   <div class="right-panel">
+     <span class="badge pull-left">{{data.sequence}}</span>
+     <span ng-bind-html="$highlight($getDisplayText())"></span>  
+   </div>
+</script>

@@ -1,0 +1,211 @@
+<div class="right_col" role="main" >
+  <div id="content" class="col-lg-10 col-sm-11 ">
+    <ol class="breadcrumb breaddesign">
+      <li><a href="">My Details</a></li>
+      <li class="active">Profile</li>
+    </ol>
+    </div>
+
+    <div class="row profile">
+      <div class="col-sm-3">
+        <div class="row">
+          <div>
+          
+            <img class="profile-image" style="width:100%" src="app/plugins/assets/images/img.jpg">
+          </div>
+          <div class="col-md-12" style=" background: #5c6160; color: #fff;
+                          border-top: 3px solid #8bc34a;
+                          text-align: center;">
+            <h4 style="text-transform: uppercase;">{{userName}}</h4>
+            <h5>{{userProfile.email_id}}</h5>
+          </div>
+        </div>
+        <!--/row--> 
+      </div>
+      <!--/col-->
+      <div class="col-sm-9">
+  <div class="container">
+    <div class="row">
+        <div class="span12">
+            <ul class="nav nav-tabs owntabs" id="myTabs">
+              <li class="active "><a id="tab-1" href="#billing" data-toggle="tab">Billing</a></li>
+              <li><a href="#plugin" id="tab-2" data-toggle="tab">Plugin</a></li>
+              <li><a href="#info" id="tab-3" data-toggle="tab">User Info</a></li>
+            </ul>
+            
+            <div class="tab-content">
+              <div class="tab-pane active" id="billing">
+                <div class="columns"  ng-if="userProfile.length != 0" ng-repeat="datas in userProfile.json_agg" >
+                          <ul class="price">
+                            <li class="header">{{datas.billingName}}</li>
+                            <li class="grey">$ {{datas.billingPrice}} / {{datas.billingUnits}}</li>
+                            <li>{{datas.billingStatus}}</li>
+                            <li>{{datas.pluginIds.length}} Plugins</li>
+                            <li>{{datas.billingDescription}}</li>
+                            <!-- <li>1GB Bandwidth</li> -->
+                            <li class="grey"><a href="#" class="button">Actions</a></li>
+                          </ul>
+                        </div>
+
+                        <div ng-if="userProfile.length == 0">
+                          <p style="text-align: center; color: red;">No Result Found! </p>
+                        </div>
+                        
+
+                </div>
+              <div class="tab-pane" id="plugin">
+                  <!-- <p>No results</p>   -->
+                  <div  ng-if="userProfile.length != 0" ng-repeat="datas in userProfile.json_agg" >
+                  <div   ng-repeat="data in datas.pluginIds" >
+                     <!-- <div ng-repeat="data in userProfile.json_agg.pluginIds"> -->
+                       <div class="col-md-6">
+                              <div class="card card-1">
+                                 <div class="cardplugin" >
+                                    <div class="col-md-5 col-sm-5col-xs-12">
+                                       <div class="">
+                                          <div class="colorblue"><b>Plugin Name</b></div>
+                                          <div class="colorblue"><b>Plugin Version</b></div>
+                                          <div class="colorblue"><b>Description</b></div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                       <div class="overme"></div>
+                                       <div class="colorblue">{{data.pluginName}}</div>
+                                       <div class="colorblue">{{data.pluginVersion}}</div>
+                                       <div class="colorblue">{{data.pluginDescription}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           </div>
+                         <!-- </div>  -->
+                </div>
+                  <div ng-if="userProfile.length == 0">
+                          <p style="text-align: center; color: red;">No Result Found! </p>
+                        </div>
+
+               </div> 
+              <div class="tab-pane" id="info">
+                  <p style="text-align: center; color: red;">yet not implementing </p>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+      </div>
+      
+    </div>
+   
+  </div>
+</div>
+
+
+
+
+
+
+<script type="text/ng-template" id="ProfileUpdate">
+<form class="form-horizontal" role="form" name="vp.crentilalsformValidate"  data-parsley-validate="" novalidate="">
+     <div class="row">
+               <div class="popupcredent">
+                  <table  class="table tablestyled">
+                  <tbody>
+                     <tr ng-repeat="plugin in finalJson.credentials">
+                        <td>
+                           <input  id="address"  ng-model="plugin.key" name="address" placeholder="key" class="form-control parsley-success"  data-parsley-id="0951">
+                        </td>
+                        <td style="position:relative;">
+                              <input type="text"  placeholder="value" name="paymentbill" ng-model="plugin.value"  value="" my-enter="addCredentials('credentials')" class="form-control">
+                              <span  ng-if="$index > 0" class="pluginremove" ng-click="removecredentials('credentials', $index)"><i class="fa fa-times-circle" style="font-size:15px" aria-hidden="true"></i></span>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+             </div>
+         </div >  
+     <div class="ngdialog-buttons">
+             <button type="button" class="btn-horz-o btn-left btn-fill-horz-o btn-save" ng-dialog-close-previous ng-click="confirm(finalJson.credentials)"> <i class="icon-save"></i> Yes
+           </button>
+      
+         <button type="button" class="btn-horz-o btn-right btn-fill-horz-o btn-cancel" ng-click="closeThisDialog()" ng-dialog-close-previous><i class="icon-cancel"></i> Cancel
+         </button>
+     </div>
+</form>
+</script>
+
+
+<!-- Modal -->
+<!-- <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Plugin Credentials</h4>
+      </div>
+       <table  class="table tablestyled">        
+      <tbody>
+         <tr ng-repeat="plugin in finalJson.credentials">
+            <td>
+               <input  id="address"  ng-model="plugin.key" name="address" placeholder="key" class="form-control parsley-success"  data-parsley-id="0951">
+            </td>
+            <td>
+                  <input type="text"  placeholder="value" name="paymentbill" ng-model="plugin.value"  value="" my-enter="addCredentials('credentials')" class="form-control">
+                  <span  ng-if="$index > 0" class="pluginremove" ng-click="removecredentials('credentials', $index)"><i class="fa fa-times-circle" style="font-size:15px" aria-hidden="true"></i></span>
+            </td>
+            
+         </tr>
+         
+      </tbody>
+   </table>  
+      <div class="modal-footer">
+      <button type="button" style="padding-left: 36px !important;" class="btn-horz-o btn-left btn-fill-horz-o btn-save" ng-dialog-close-previous ng-click="updatePluginDetails(plugin)"> <i class="icon-save"></i> Yes
+            </button>
+      </div>
+    </div> -->
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.nav-tabs a').on('click',function(){ window.location.hash = $(this).attr('href'); });
+
+
+  $("a[data-tab-destination]").on('click', function() {
+        var tab = $(this).attr('data-tab-destination');
+        $("#"+tab).click();
+    });
+
+</script>
+
+
+
+
+<script type="text/template" id="myContent">
+<div style="display:none">
+<div  id="myContent">
+ <table  class="table tablestyled">        
+      <tbody>
+         <tr ng-repeat="plugin in finalJson.credentials">
+            <td>
+               <input  id="address"  ng-model="plugin.key" name="address" placeholder="key" class="form-control parsley-success"  data-parsley-id="0951">
+            </td>
+            <td>
+                  <input type="text"  placeholder="value" name="paymentbill" ng-model="plugin.value"  value="" my-enter="addCredentials('credentials')" class="form-control">
+                  <span  ng-if="$index > 0" class="pluginremove" ng-click="removecredentials('credentials', $index)"><i class="fa fa-times-circle" style="font-size:15px" aria-hidden="true"></i></span>
+            </td>
+            <button type="button" class="btn-horz-o btn-left btn-fill-horz-o btn-save" ng-dialog-close-previous ng-click="updatePluginDetails(plugin)"> <i class="icon-save"></i> Yes
+            </button>
+         </tr>
+         
+      </tbody>
+   </table>        
+</div>
+</div>
+</script>
+
+

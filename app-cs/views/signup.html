@@ -1,0 +1,200 @@
+
+<loader ng-show="isLoad"></loader>
+<div class="auth">
+
+<div class="">
+<div class="selfcard">
+<div class="col-sm-8 col-sm-offset-2">
+             <div class="wizard-container">
+                <div class="card wizard-card ct-wizard-orange" id="wizardProfile">
+                   <form id="commentForm" name="us.formValidate" method="get" action="" class="form-horizontal">
+                      <div id="rootwizard">
+                         <div class="wizard-header">
+                            <h3 class="color">
+                               BUILD YOUR PROFILE 
+                            </h3>
+                         </div>
+                         <ul class="nav nav-pills nav-wizard" id="tabs">
+                            <li><a href="#about" data-toggle="tab">1. User  details</a></li>
+                            <li><a href="#account" data-toggle="tab">2. Plugin Mapping</a></li>
+                            <li><a href="#address" data-toggle="tab">3. Summary Page</a></li>
+                         </ul>
+                         <div class="tab-content">
+                            <div class="tab-pane {{firstTab}}" id="about">
+                               <div class="row ">
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                           <div class="form-group label-floating {{validateForClass('lastname',user.lastname)}}">
+                                              <label class="control-label">First Name </label>
+                                              <input class="form-control required" type="text" name="firstname" required="required" ng-model="user.firstname">
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                           <div class="form-group label-floating {{validateForClass('lastname',user.lastname)}}">
+                                              <label class="control-label"> Last Name</label>
+                                              <input class="form-control required" type="text" name="lastname" required="required" ng-model="user.lastname">
+                                              <input style="display:none" class="form-control required" type="text" name="emailtest" required="required" ng-model="emailtest">
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+                               <div class="row ">
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                           <div class="form-group label-floating {{validateForClass('username',user.username)}}">
+                                              <label class="control-label">Username </label>
+                                              <input class="form-control" type="text" name="username" required="required" ng-model="user.username">
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                           <div class="form-group label-floating {{validateForClass('password',user.password)}}"">
+                                              <label class="control-label" for="vendorname"> Password
+                                              </label>
+                                              <input class="form-control" type="password" name="password" required="required" ng-model="user.password">
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+                               <div class="row ">
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                           <div class="form-group label-floating {{validateForClass('birth_date',user.birth_date)}}">
+                                              <label class="control-label">Date of  Birth </label>
+                                              <input class="form-control" id="requestdate1" type="text" name="birth_date" required="required" ng-model="user.birth_date">
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                     <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                           <div class="form-group label-floating {{validateForClass('email',user.email_id)}}">
+                                              <label class="control-label" for="vendorname"> Email </label>
+                                              <input class="form-control" type="text" name="email" required="required" ng-model="user.email_id">
+                                           </div>
+                                           <span style="color:red" ng-if="email">This mail already taken {{email}}</span>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                            <div class="tab-pane active" id="account">
+                               <div class="columns"  ng-if="billingPlan.billingPlans.length != 0" ng-repeat="datas in billingPlan.billingPlans"  >
+                                  <ul class="price" ng-class="{'selecteddiv': datas.class == true}">
+                                     <li class="header">{{datas.billingname}}</li>
+                                     <li class="grey">$ {{datas.billingprice}} / {{datas.billingunits}}</li>
+                                     <li>{{datas.billingstatus}}</li>
+                                     <li>{{datas.plugins.length}} Plugins</li>
+                                     <li>{{datas.billingdescription}}</li>
+                                     <li class="grey"><a href="#" ng-click="selectedPlugin(datas)"  class="button">{{billingbuttonName}}</a></li>
+                                  </ul>
+                               </div>
+                               <div ng-if="billingPlan.billingPlans.length == 0">
+                                  <p style="text-align: center; color: red;">No Result Found! </p>
+                               </div>
+                            </div>
+                            <div class="tab-pane active" id="address">
+                               <div  ng-repeat="datas in pluginselected track by $index" >
+                                  <div class="columns"  ng-if="billingPlan.billingPlans.length != 0" ng-repeat="data in datas.plugins"  >
+                                     <ul class="price">
+                                        <li class="header" style="    background-color: #0fb2fc !important;">{{data.plugin_name}}</li>
+                                        <li class="grey">{{data.plugin_version}} </li>
+                                        <li>{{data.plugin_status}}</li>
+                                        <li>{{data.plugin_description}}</li>
+                                        <li>{{datas.billingdescription}}</li>
+                                        <li class="grey"><a href="#" ng-click="addCredent(data, $index)"   class="button">Add Credentials</a></li>
+                                     </ul>
+                                  </div>
+                               </div>
+                               <div ng-if="billingPlan.billingPlans.length == 0">
+                                  <p style="text-align: center; color: red;">No Result Found! </p>
+                               </div>
+                            </div>
+                         </div>
+                         <ul class="list-unstyled wizard list-inline text-center" >
+                            <li class="previous first" style="display:none;"><a href="#">First</a></li>
+                            <!-- ng-if="previousbuttons"  -->
+                            <li  class="previous  "><a class ="Signupslider btn btn-raised btn-info pull-right" style="float: right !important;" href="#">Previous</a></li>
+                            <li   class="next">                
+                               <a ng-click="emailCheck()" href="#"  style="float: left !important;"" class="Signupslider btn btn-raised btn-info pull-left">Next</a>
+                            </li>
+                            <li class="finish last" style="display:none;"><a href="#">Last</a></li>
+                            <li class="finish" ><a ng-click="userRegisteration()"  href="javascript:;" class="Signupslider btn btn-raised btn-info pull-left">Finish</a></li>
+                         </ul>
+                      </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+
+</div>
+ <div class="text-xs-center"> <a href="/login" class="btn btn-secondary rounded btn-sm">
+      <i class="fa fa-arrow-left"></i> Back to Login
+    </a> </div>
+
+</div>
+</div>
+
+
+<script>
+$.material.init();
+</script>
+
+<script src="assets/vendor-plugins/wizard/jquery.bootstrap.wizard.js"></script>
+<script src="assets/vendor-plugins/wizard/wizard.js"></script>
+
+
+<script>
+
+    $('#requestdate1').bootstrapMaterialDatePicker({
+        time: false,
+        clearButton: false,
+        switchOnClick: true,
+        format: 'DD-MM-YYYY',
+        maxDate: new Date()
+    });
+
+   $(document).ready(function() {
+    var $validator = $("#commentForm").validate({
+          rules: {
+            username: {
+              required: true,
+              minlength: 4
+            },
+            firstname: {
+              required: true,
+              minlength: 4
+            },
+            email: {
+              required: true,
+              email: true,
+              minlength: 4
+            },
+            password: {
+              required: true,
+              minlength: 4
+            }
+          },
+          messages: {
+            username: "please enter username",
+            firstname: "please enter firstname",
+            password: "please enter password",
+            email:"please enter email"
+            },
+        });   
+   
+   });
+</script>

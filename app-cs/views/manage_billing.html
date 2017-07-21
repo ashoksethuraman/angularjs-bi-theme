@@ -1,0 +1,103 @@
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<article class="content items-list-page"  ng-init="getBillings()">
+   <div class="title-search-block">
+      <div class="title-block">
+         <div class="row">
+            <div class="col-md-6">
+               <h3 class="title"> Billing Items
+                  </a>
+               </h3>
+            </div>
+         </div>
+      </div>
+      <div class="items-search">
+         <form class="form-inline">
+            <div class="input-group"> <input type="text" class="form-control boxed rounded-s" placeholder="Search for..."> <span class="input-group-btn">
+               <button class="btn btn-secondary rounded-s" type="button">
+               <i class="fa fa-search"></i>
+               </button>
+               </span> 
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="card items">
+      <div class="item-list striped">
+         <table class="table">
+            <thead class="thead-inverse">
+              <tr>
+               <th>Plan Name</th>
+               <th>Validity</th>
+               <th> No of Queries</th>
+               <th>Status</th>
+               <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="data in billingList.billing">
+                  <td>{{data.name}}</td>
+                  <td>{{data.billing_plan_type}}</td>
+                  <td>{{data.credit_limit}}</td>
+                  <td>{{data.status}}</td>
+                  <td><a ui-sref="billing-view-edit({id:data.id})" class="link">Edit</a> / <a ng-click="popup()">Remove</a></td>
+               </tr>
+               <tr>
+                  <td style="text-align:center; color: #E91E63;" colspan="7" ng-show="billingList.billing.length==0"> No Result Found ! </td>
+              </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   </div>
+   <nav class="text-xs-right">
+      <ul class="pagination">
+         <li class="page-item"> <a class="page-link" href="">
+            Prev
+            </a> 
+         </li>
+         <li class="page-item active"> <a class="page-link" href="">
+            1
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            2
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            3
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            4
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            5
+            </a> 
+         </li>
+         <li class="page-item"> <a class="page-link" href="">
+            Next
+            </a> 
+         </li>
+      </ul>
+   </nav>
+</article>
+<script type="text/javascript">
+   // $.material.init();
+</script>
+
+
+
+ <script type="text/ng-template" id="developeractions">
+    <h3 class="ngdialog-heading"><b>{{title}}</b></h3>
+    <div class="ngdialog-message">
+        <per>Are you sure you want to {{action}}?
+        </per>
+    </div>
+    <div class="ngdialog-buttons">
+        <button type="button" class="btn btn-raised btn-info" ng-dialog-close-previous ng-click="confirm()"></i> Yes
+        </button>
+      
+    </div>
+</script>
+

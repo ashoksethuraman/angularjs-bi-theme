@@ -1,0 +1,388 @@
+<style>
+a.read-more, a.read-less {
+  cursor: pointer;
+  color: blue;
+}
+span.more-text {
+  display: none;
+}
+span.more-text.show {
+    display: inline !important
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content{
+  height:500px;
+  width:800px;
+  margin-top:-120px;
+  background:#ffffff;
+
+
+}
+
+.td-theme{
+  width:154px;
+  font-weight: bold;
+}
+
+tr > td
+{
+  padding-bottom: 1em;
+}
+</style>
+        <div class="right_col" role="main">
+          <div class="">
+            <!-- <div class="page-title">
+              <div class="title_left">
+                <h3>Products</h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" style="height: 34px;" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="row">
+              
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" style="height: 34px;" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+             
+            </div>
+
+             <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="row form-group" >
+                  <div class="col-md-1 col-sm-1 col-xs-12">
+                    <!-- <input type="text" class="form-control" value=""> -->
+                    <div class="form-group">
+                                    <label for="s1">Gender</label>
+                                    <select id="s1" class="form-control">
+                                      <option value="Apple fritter">Men</option>
+                                      <option value="Croissant">Women</option>
+                                     <!--  <option value="Donut">Donut</option>
+                                      <option value="Financier">Financier</option>
+                                      <option value="Jello">Jello</option>
+                                      <option value="Madeleine">Madeleine</option>
+                                      <option value="Pound cake">Pound cake</option>
+                                      <option value="Pretzel">Pretzel</option>
+                                      <option value="Sfogliatelle">Sfogliatelle</option> -->
+                                    </select>
+                </div>
+
+                       
+                  </div>
+                  <div class="col-md-2 col-sm-2 col-xs-12 ">
+                  <div class="form-group">
+                                    <label for="s1">Category</label>
+                                    <select id="s1" class="form-control">
+                                      <option value="Apple fritter">Top</option>
+                                      <option value="Croissant">Bottoms</option>
+                                      <option value="Apple fritter">Outwear</option>
+                                      <option value="Croissant">Accessories</option>
+                                      <option value="Apple fritter">Shoes</option>
+                                      <option value="Croissant">Formal</option>
+                                      <option value="Apple fritter">Sportswear</option>
+                                      <option value="Croissant">Shirt</option>
+                                      <option value="Croissant">Swimwear</option>
+                                      <option value="Croissant">Bags</option>
+                                      <option value="Croissant">Underwear</option>
+                                     
+                                    </select>
+                </div>
+                         
+                   </div>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                   <div class="form-group">
+                                    <label for="s1">Sub Category</label>
+                                    <select id="s1" class="form-control">
+                                      <option value="Apple fritter">T-Shirt</option>
+                                      <option value="Croissant">Shirt</option>
+                                      <option value="Croissant">Jumper</option>
+                                      <option value="Croissant">Sweatshirt</option>
+                                      <option value="Croissant">Hoodie</option>
+                                     
+                                    </select>
+                </div>
+                  </div>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="form-group">
+                                    <label for="s1">Brand</label>
+                                    <select id="s1" class="form-control">
+                                      <option value="Apple fritter">1 Like No Other</option>
+                                      <option value="Croissant">11 Degrees</option>
+                                       <option value="Croissant">213 Apparel</option>
+                                        <option value="Croissant">2nd Day</option>
+                                         <option value="Croissant">2xu</option>
+                                     
+                                    </select>
+                     </div>
+
+                  </div>
+
+                  <div class="col-md-1 col-sm-1 col-xs-12">
+                    <div class="form-group">
+                                    <label for="s1">Size</label>
+                                    <select class="form-control"><option ng-repeat="x in sizes">{{x}}</option>
+                                    </select>
+                     </div>
+
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-12">
+                    <div class="form-group">
+                                    <label for="s1">Colour</label>
+                                    <select class="form-control"><option ng-repeat="x in colour">{{x.colorName}}</option>
+                                    </select>
+                     </div>
+
+                  </div>
+
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                  <div class="form-group">
+                        <rzslider rz-slider-model="slider.minValue"
+                rz-slider-high="slider.maxValue"
+                rz-slider-options="slider.options"></rzslider>
+                </div>
+                </div>
+
+                </div>
+
+              </div>
+              <!-- <div class="col-md-2 col-sm-2 col-xs-12">
+
+                 
+              </div> -->
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Product Details</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                     <div class="col-md-12 col-sm-12 col-xs-12">
+                       <table class="table" style="">
+                       <thead>
+                       
+
+                                       <!-- <th>Id</th> -->
+                                       <th width="25%">Name</th>
+                                       <th width="25%">Description</th>
+                                       <!-- <th>Link</th> -->
+                                       <!-- <th>Price</th> -->
+                                       <!-- <th>Actual Price</th> -->
+                                       
+                                       <!-- <th>Original Images</th> -->
+                                       <!-- <th>Store</th> -->
+                                       <th width="10%">Category</th>
+                                       <!-- <th>Match Category</th> -->
+                                       <!-- <th>Top Category</th> -->
+                                       <th width="10%">Sub Category</th>
+                                       <th width="10%" style="text-align:center;">Gender</th>
+                                       <!-- <th>Size</th> -->
+                                       <!-- <th>Color</th> -->
+                                       <!-- <th>Imported Id</th> -->
+                                       <!-- <th>SKU</th> -->
+                                       <!-- <th>Brand Id</th> -->
+                                       <!-- <th>On Sale</th> -->
+                                       <th width="15%" style="text-align:center;">Images</th>
+                                       <th width="5%" style="text-align:center;">Action</th>
+                       </thead>
+                       <tbody>
+                         <tr ng-repeat="d in filteredTodos">
+                        
+                                     <!-- <td scope="row">{{ d.id }}</td> -->
+                                      <td ng-click="clickToOpen(d)" scope="row" style="cursor:pointer;">{{ d.name }}</td>
+                                      <td scope="row" style="display:block;overflow-y: auto;height: 80px;width: 270px; "><p read-more>{{ d.desc }}</p></td>
+                                       <!-- <td scope="row">{{ d.url }}</td> -->
+
+                                       <!-- <td scope="row"><a href="{{ d.url }}">{{ d.url }}</a></td> -->
+                                       <!-- <td scope="row">{{ d.price }}</td> -->
+                                       <!-- <td scope="row">{{ d.actualPrice }}</td> -->
+                                      
+                                      <!--  <td scope="row"> <img src="{{ d.originalImages[0] }}" alt="" border=3 height=100 width=100></img></td> -->
+                                       <!-- <td scope="row">{{ d.store }}</td> -->
+                                       <td scope="row">{{ d.category }}</td>
+                                       <!-- <td scope="row">{{ d.matchCategory }}</td> -->
+                                       <!-- <td scope="row">{{ d.topCategory }}</td> -->
+                                       <td scope="row">{{ d.subCategory }}</td>
+                                       <td scope="row" style="text-align:center;">
+                                         <a href="#/male" ><i class="fa fa-male" ng-if="d.gender=='1'"></i></a>
+                                         <a href="#/female" ><i class="fa fa-female" ng-if="d.gender=='0'"></i></a>
+                                       </td>
+                                       <!-- <td scope="row">{{ d.size[0] }}</td> -->
+                                       <!-- <td scope="row">{{ d.color[0] }}</td> -->
+                                       <!-- <td scope="row">{{ d.importedId }}</td> -->
+                                       <!-- <td scope="row">{{ d.sku }}</td> -->
+                                       <!-- <td scope="row">{{ d.brand }}</td> -->
+                                       <!-- <td scope="row">{{ d.onSale }}</td> -->
+                                        <td scope="row" style="text-align:center;"> <img ng-mouseover="showImage(d)" src="{{ d.images[0] }}" alt="" border=3 height=100 width=100 style="cursor:pointer"></img></td>
+                                       <td scope="row" style="text-align:center;">
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                                <a href="#/eye" ng-click="clickToOpen(d)"><i class="fa fa-eye "></i></a>
+                                             </div>
+                                             <div class="col-md-5 col-sm-5 col-xs-12">
+                                                <a href="{{ d.url }}" target="_blank"><i class="fa fa-link"></i></a>
+                                             </div>
+                                         </div>
+                                       </td>
+                                                   
+
+                         </tr>
+                       </tbody>
+                      
+                       </table>
+ <!-- <div data-pagination="" data-num-pages="numPages()" 
+      data-current-page="currentPage" data-max-size="maxSize"  
+      data-boundary-links="true"></div> -->
+
+      <button type="button" class="btn btn-primary" ng-click="displayMore(from,size)">Show Moree</button>
+      
+
+
+
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script type="text/ng-template" id="commonDialog">
+        <div>
+        <h3>Product Details</h3><table class="" style="display: block;overflow-y: auto;height:371px;">
+       <tbody>
+           
+            <tr>
+              <td> 
+                   <table style="">
+                   <tr>
+                    <td class="td-theme">Name</td>
+                    <td style="cursor:pointer;">{{ singleProduct.name }}</td>
+                   </tr>
+        <tr>
+          <td class="td-theme">Description</td>
+                  <td>{{ singleProduct.desc }}</td>
+            </tr>
+            <tr>
+            <td class="td-theme">Link</td>
+                                       <td scope="row"><a href="{{ singleProduct.url }}">{{ singleProduct.url }}</a></td>
+            </tr>
+
+            <tr>
+              <td class="td-theme">Price</td>
+                                       <td scope="row">{{ singleProduct.price }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Actual Price</td>
+                                       <td scope="row">{{ singleProduct.actualPrice }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Images</td>
+                                       <td scope="row"> <img src="{{ singleProduct.images[0] }}" alt="" border=3 height=100 width=100></img></td>
+            </tr>
+            <tr>
+              <td class="td-theme">Original Images</td>
+                                       <td scope="row"> <img src="{{ singleProduct.originalImages[0] }}" alt="" border=3 height=100 width=100></img></td>
+            </tr>
+
+            <tr>
+               <td class="td-theme">Store</td>
+                                       <td scope="row">{{ singleProduct.store }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Category</td>
+                                       <td scope="row">{{ singleProduct.category }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Match Category</td>
+                                       <td scope="row">{{ singleProduct.matchCategory }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Top Category</td>
+                                       <td scope="row">{{ singleProduct.topCategory }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Sub Category</td>
+                                       <td scope="row">{{ singleProduct.subCategory }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Gender</td>
+                                       <td scope="row">{{ singleProduct.gender }}</td>
+            </tr>
+
+            <tr>
+              <td class="td-theme">Size</td>
+                                       <td scope="row">{{ singleProduct.size[0] }}</td>
+            </tr>
+            <tr>
+                <td class="td-theme">Color</td>
+                                       <td scope="row">{{ singleProduct.color[0] }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Imported Id</td>
+                                       <td scope="row">{{ singleProduct.importedId }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">SKU</td>
+                                       <td scope="row">{{ singleProduct.sku }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">Brand Id</td>
+
+                                       <td scope="row">{{ singleProduct.brand }}</td>
+            </tr>
+            <tr>
+              <td class="td-theme">On Sale</td>
+                                       <td scope="row">{{ singleProduct.onSale }}</td>
+            </tr>
+            </table>
+              </td>
+            </tr>
+
+
+
+      </tbody>
+        </table></div>
+        </script>
+        <script type="text/ng-template" id="imageDialog">
+          <div style="text-align:center;display: block;overflow-y: auto;height:470px;">
+            <!-- <img src="{{ singleImage.images[0] }}" alt="" border=3 height=400 width=500 style="cursor:pointer"></img> -->
+
+            <img src="{{ singleImage.images[0] }}" alt="" class="img-responsive" border=3 style="cursor:pointer"></img>
+          </div>
+        </script>
+        
